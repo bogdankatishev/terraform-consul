@@ -22,21 +22,14 @@ resource "docker_service" "consul" {
         container_spec {
             image = "consul"
 
-            mounts = {
-                          target      = "/var/run/docker.sock"
-                          source      = "/var/run/docker.sock"
-                          type        = "bind"
-                          read_only   = true
-                     }
-
-            mounts = {
-                          source      = "${docker_volume.consul_data.name}"
-                          target      = "/var/consul"
-                          type        = "volume"
-                          read_only   = false
-                     }
-
-
+            mounts = [
+                {
+                    source      = "${docker_volume.consul_data.name}"
+                    target      = "/var/consul"
+                    type        = "volume"
+                    read_only   = false
+                },
+            ]
         }
         networks     = ["${docker_network.private_network.name}"]
     }
