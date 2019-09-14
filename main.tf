@@ -5,9 +5,6 @@
 resource "docker_volume" "consul_data" {
   name = "consul_data"
   driver = "local-persist"
-  driver_opts = {
-      "mountpoint" = "${var.consul_data_mount}"
-  }
 }
 
 # Create a new docker network
