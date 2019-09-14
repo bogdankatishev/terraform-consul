@@ -10,6 +10,11 @@ resource "docker_volume" "consul_data" {
   }
 }
 
+# Create a new docker network
+resource "docker_network" "private_network" {
+  name = "dev"
+}
+
 resource "docker_service" "consul" {
     name = "consul-service"
 
@@ -33,7 +38,7 @@ resource "docker_service" "consul" {
 
             ]
         }
-        networks     = ["${var.networks}"]
+        networks     = ["${docker_network.private_network.name}"]
     }
 
     endpoint_spec {
