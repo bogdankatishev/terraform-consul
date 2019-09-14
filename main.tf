@@ -34,7 +34,7 @@ resource "docker_service" "consul" {
                           target      = "/var/consul"
                           type        = "volume"
                           read_only   = false
-                     },
+                     }
 
 
         }
